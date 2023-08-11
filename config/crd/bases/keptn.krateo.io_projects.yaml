@@ -54,28 +54,28 @@ spec:
                       key:
                         description: Secret namespace for Keptn token
                         type: string
-                  projectName:
-                    description: Keptn project name
+              projectName:
+                description: Keptn project name
+                type: string
+              serviceName:
+                description: Keptn service name
+                type: string
+              shipyard:
+                description: Shipyard definition file content
+                type: string
+              git:
+                description: Details of remote Git repository
+                type: object
+                properties:
+                  url:
+                    description: Remote git repository URL
                     type: string
-                  serviceName:
-                    description: Keptn service name
+                  user:
+                    description: Git user
                     type: string
-                  shipyard:
-                    description: Shipyard definition file content
+                  token:
+                    description: Git user access token
                     type: string
-                  git:
-                    description: Details of remote Git repository
-                    type: object
-                    properties:
-                      url:
-                        description: Remote git repository URL
-                        type: string
-                      user:
-                        description: Git user
-                        type: string
-                      token:
-                        description: Git user access token
-                        type: string
           status:
             description: Status defines the observed state of Project
             type: object
