@@ -37,7 +37,7 @@
 3. Fix the reference to the docker image (and tag) in `Makefile` 
 
     ```bash
-    VERSION ?= 0.0.8
+    VERSION ?= 0.0.1
     ...
     IMAGE_TAG_BASE ?= ghcr.io/krateoplatformops/keptn-provider
     ...
