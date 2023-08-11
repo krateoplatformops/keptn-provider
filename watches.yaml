@@ -1,0 +1,10 @@
+---
+# Use the 'create api' subcommand to add watches to this file.
+- version: v1alpha1
+  group: keptn.krateo.io
+  kind: Project
+  role: project
+  finalizer:
+    name: finalizer.projects.keptn.krate.io
+    role: projectfin
+#+kubebuilder:scaffold:watch

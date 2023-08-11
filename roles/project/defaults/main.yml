@@ -1,0 +1,4 @@
+---
+# defaults file for reconcile_project
+cli:
+  version: 0.13.1

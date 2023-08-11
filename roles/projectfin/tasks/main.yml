@@ -1,0 +1,30 @@
+# tasks file for Project
+---
+- name: Check if the project already exists
+  uri:
+    url: "{{ api.url }}/controlPlane/v1/project/{{ project_name }}"
+    method: GET
+    validate_certs: false
+    return_content: yes
+    status_code:
+      - 200
+      - 404
+    body_format: json
+    headers:
+      accept: application/json
+      x-token: "{{ keptn_secret.resources[0].spec.data[api.token_secret_ref.key] }}"
+  register: check_project
+
+- name: Delete the project found
+  when: check_project.status == 200
+  uri:
+    url: "{{ api.url }}/controlPlane/v1/project/{{ project_name }}"
+    method: DELETE
+    return_content: yes
+    validate_certs: false
+    timeout: 300
+    status_code:
+      - 200
+    headers:
+      accept: application/json
+      x-token: "{{ keptn_secret.resources[0].spec.data[api.token_secret_ref.key] }}"
