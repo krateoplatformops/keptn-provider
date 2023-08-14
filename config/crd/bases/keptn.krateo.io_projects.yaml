@@ -73,9 +73,19 @@ spec:
                   user:
                     description: Git user
                     type: string
-                  token:
-                    description: Git user access token
-                    type: string
+                  tokenSecretRef:
+                    description: Reference to an existing Kubernetes secret
+                    type: object
+                    properties:
+                      name:
+                        description: Secret name for Keptn token
+                        type: string
+                      namespace:
+                        description: Secret namespace for Keptn token
+                        type: string
+                      key:
+                        description: Secret namespace for Keptn token
+                        type: string
           status:
             description: Status defines the observed state of Project
             type: object

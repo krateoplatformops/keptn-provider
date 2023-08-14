@@ -25,6 +25,14 @@
 
 - name: Create Keptn project and related service
   block:
+    - name: Retrieve access data for Git repository
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        name: "{{ git.token_secret_ref.name }}"
+        namespace: "{{ git.token_secret_ref.namespace }}"
+      register: github_secret
+
     - name: Create the project just in case it's not found
       uri:
         url: "{{ api.url }}/controlPlane/v1/project"
@@ -37,7 +45,7 @@
         body_format: json
         body:
           gitRemoteURL: "{{ git.url }}"
-          gitToken: "{{ git.token }}"
+          gitToken: "{{ github_secret.resources[0].data[git.token_secret_ref.key] | b64decode }}"
           gitUser: "{{ git.user }}"
           name: "{{ project_name }}"
           shipyard: "{{ shipyard | b64encode }}"
