@@ -50,7 +50,22 @@
     > **Note**: The names of all variables in the spec field are converted to snake_case by the operator before running Ansible. For example, serviceAccount in the spec becomes service_account in Ansible. You can disable this case conversion by setting the snakeCaseParameters option to false in your watches.yaml. It is recommended that you perform some type of validation in Ansible on the variables to ensure that your application is receiving the expected input.
 
 5. Adding and pushing a new tag triggers the CI pipeline, producing a new docker image of the controller manager
-6. Once the docker image will be pushed to the registry, execute this command to deploy the operator to the Kubernetes context in use
+6. (Only for Mac ARM users) Add Makefile target to `Makefile` for build and push docker image for manual testing purposes
+
+   ```make
+   BUILDPLATFORM ?= linux/amd64
+   .PHONY: docker-buildx-push
+   docker-buildx-push: ## Build and push docker image for the manager for cross-platform support
+       docker buildx build --push --platform=${BUILDPLATFORM} --tag ${IMG} -f Dockerfile .
+   ```
+
+   and execute the command to build and push the image to the registry:
+
+   ```bash
+   make docker-buildx-push
+   ```
+
+7. Once the docker image will be pushed to the registry, execute this command to deploy the operator to the Kubernetes context in use
 
     ```bash
     make deploy
