@@ -2,6 +2,36 @@
 
 # Keptn operator
 
+Ansible-base operator designed to streamline the management of Keptn projects, making it easier for DevOps teams to create, update, and maintain their projects within the Keptn framework. This operator is built using the Operator SDK, a framework that simplifies the process of creating Kubernetes-native applications, combined with Ansible, a popular automation platform.
+
+**Key Features:**
+
+1. **Project Lifecycle Management:** The operator empowers users to seamlessly create and manage Keptn projects through the Kubernetes API. Using custom resources, operators can effortlessly define the project's metadata, services, and integrations, allowing for consistency and repeatability in project creation.
+
+2. **Declarative Configuration:** With Ansible integration, users can provide declarative configuration in the form of YAML files. These files outline the desired state of Keptn projects, services, and integrations, which the operator then automatically translates into actionable tasks and API calls.
+
+3. **Automated Updates:** The operator monitors the state of Keptn projects and their components. When changes are detected in the declared configuration, the operator employs Ansible playbooks to orchestrate the necessary updates. This ensures that projects stay aligned with the desired configuration and prevents configuration drift.
+
+4. **Intelligent Error Handling:** In the event of failures or errors during project management operations, the operator leverages Ansible's robust error handling capabilities to provide detailed diagnostics and, whenever possible, autonomously recover from the failure state.
+
+5. **Scalability:** As a Kubernetes-native application, the operator inherits Kubernetes' scalability and resilience features. It can seamlessly manage numerous Keptn projects and adapt to fluctuations in workload.
+
+6. **Customization:** Users can extend the operator's functionality by leveraging Ansible's vast library of modules and plugins. This flexibility allows teams to integrate the operator with their existing tools and processes.
+
+7. **Version Control:** Keptn project configurations are often stored in version control systems like Git. The operator can pull configuration updates from these repositories, enabling teams to manage project configurations in a centralized manner.
+
+**Use Cases:**
+
+1. **Continuous Deployment:** DevOps teams can use the operator to automate the deployment of applications by managing the necessary Keptn projects, services, and integrations.
+
+2. **Multi-Environment Management:** The operator can manage Keptn projects across different environments (e.g., development, staging, production), ensuring consistency and reducing human error.
+
+3. **Infrastructure as Code:** By defining Keptn projects and configurations as code, infrastructure teams can manage projects alongside other infrastructure components.
+
+4. **Collaborative Development:** Development and operations teams can collaborate more effectively by using version-controlled Keptn project configurations that are managed by the operator.
+
+In conclusion, the Keptn Project Operator with Ansible Integration offers a comprehensive solution for managing Keptn projects within Kubernetes environments. By combining the strengths of the Operator SDK and Ansible, this operator simplifies project lifecycle management, configuration updates, and error handling, providing DevOps teams with a robust tool to streamline their Keptn operations.
+
 ## TODO list
 
 - [x] Create/Update Ansible role
@@ -11,6 +41,7 @@
 - [ ] Test using molecule
 - [ ] Change package manager from Kustomize to Helm
 - [ ] Version the Helm chart in a separate repository
+- [ ] Add sync strategies to keep aligned Keptn project to the manifest
 
 ## Steps to create this operator
 
@@ -34,7 +65,7 @@
        role: projectfin
     ```
 
-3. Fix the reference to the docker image (and tag) in `Makefile` 
+3. Fix the reference to the docker image (and tag) in `Makefile`
 
     ```bash
     VERSION ?= 0.0.1
