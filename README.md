@@ -7,7 +7,7 @@
 - [x] Create/Update Ansible role
 - [x] Add a finalizer to handle the delete event
 - [x] Delete Ansible Role
-- [ ] Refer to Kubernetes secrets (like [here](https://kubernetes.io/docs/concepts/configuration/secret/#uses-for-secrets)) instead of clear-text secrets in the Project manifest
+- [x] Refer to Kubernetes secrets (like [here](https://kubernetes.io/docs/concepts/configuration/secret/#uses-for-secrets)) instead of clear-text secrets in the Project manifest
 - [ ] Test using molecule
 - [ ] Change package manager from Kustomize to Helm
 - [ ] Version the Helm chart in a separate repository
