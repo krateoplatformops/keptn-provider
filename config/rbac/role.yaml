@@ -46,6 +46,9 @@ rules:
       - projects
       - projects/status
       - projects/finalizers
+      - shipyard
+      - shipyard/status
+      - shipyard/finalizers
     verbs:
       - create
       - delete

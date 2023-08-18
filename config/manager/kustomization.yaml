@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: ghcr.io/krateoplatformops/keptn-provider
-  newTag: 0.0.13
+  newTag: 0.0.14
