@@ -33,6 +33,14 @@
         namespace: "{{ git.token_secret_ref.namespace }}"
       register: github_secret
 
+    - name: Retrieve Shipyard content
+      kubernetes.core.k8s_info:
+        api_version: v1alpha1
+        kind: Shipyard
+        name: "{{ shipyard_ref.name }}"
+        namespace: "{{ shipyard_ref.namespace }}"
+      register: shipyard_cr
+
     - name: Create the project just in case it's not found
       uri:
         url: "{{ api.url }}/controlPlane/v1/project"
@@ -48,7 +56,7 @@
           gitToken: "{{ github_secret.resources[0].data[git.token_secret_ref.key] | b64decode }}"
           gitUser: "{{ git.user }}"
           name: "{{ project_name }}"
-          shipyard: "{{ shipyard | b64encode }}"
+          shipyard: "{{ shipyard_cr.resources[0].spec[shipyard_ref.key] | b64encode }}"
         headers:
           accept: application/json
           x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"

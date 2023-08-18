@@ -12,86 +12,98 @@ spec:
     singular: project
   scope: Namespaced
   versions:
-  - name: v1alpha1
-    schema:
-      openAPIV3Schema:
-        description: Project is the Schema for the projects API
-        properties:
-          apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-            type: string
-          kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-            type: string
-          metadata:
-            type: object
-          spec:
-            description: Spec defines the desired state of Project
-            type: object
-            x-kubernetes-preserve-unknown-fields: true
-            properties:
-              api:
-                description: Keptn API parameters
-                type: object
-                properties:
-                  url:
-                    description: Keptn API endpoint
-                    type: string
-                  tokenSecretRef:
-                    description: Reference to an existing Kubernetes secret
-                    type: object
-                    properties:
-                      name:
-                        description: Secret name for Keptn token
-                        type: string
-                      namespace:
-                        description: Secret namespace for Keptn token
-                        type: string
-                      key:
-                        description: Secret namespace for Keptn token
-                        type: string
-              projectName:
-                description: Keptn project name
-                type: string
-              serviceName:
-                description: Keptn service name
-                type: string
-              shipyard:
-                description: Shipyard definition file content
-                type: string
-              git:
-                description: Details of remote Git repository
-                type: object
-                properties:
-                  url:
-                    description: Remote git repository URL
-                    type: string
-                  user:
-                    description: Git user
-                    type: string
-                  tokenSecretRef:
-                    description: Reference to an existing Kubernetes secret
-                    type: object
-                    properties:
-                      name:
-                        description: Secret name for Keptn token
-                        type: string
-                      namespace:
-                        description: Secret namespace for Keptn token
-                        type: string
-                      key:
-                        description: Secret namespace for Keptn token
-                        type: string
-          status:
-            description: Status defines the observed state of Project
-            type: object
-            x-kubernetes-preserve-unknown-fields: true
-        type: object
-    served: true
-    storage: true
-    subresources:
-      status: {}
+    - name: v1alpha1
+      schema:
+        openAPIV3Schema:
+          description: Project is the Schema for the projects API
+          properties:
+            apiVersion:
+              description:
+                "APIVersion defines the versioned schema of this representation
+                of an object. Servers should convert recognized schemas to the latest
+                internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
+              type: string
+            kind:
+              description:
+                "Kind is a string value representing the REST resource this
+                object represents. Servers may infer this from the endpoint the client
+                submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: Spec defines the desired state of Project
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+              properties:
+                api:
+                  description: Keptn API parameters
+                  type: object
+                  properties:
+                    url:
+                      description: Keptn API endpoint
+                      type: string
+                    tokenSecretRef:
+                      description: Reference to an existing Kubernetes secret
+                      type: object
+                      properties:
+                        name:
+                          description: Secret name for Keptn token
+                          type: string
+                        namespace:
+                          description: Secret namespace for Keptn token
+                          type: string
+                        key:
+                          description: Secret namespace for Keptn token
+                          type: string
+                projectName:
+                  description: Keptn project name
+                  type: string
+                serviceName:
+                  description: Keptn service name
+                  type: string
+                shipyardRef:
+                  description: Shipyard definition file content
+                  type: object
+                  properties:
+                    name:
+                      description: Secret name for Keptn token
+                      type: string
+                    namespace:
+                      description: Secret namespace for Keptn token
+                      type: string
+                    key:
+                      description: Secret namespace for Keptn token
+                      type: string
+                git:
+                  description: Details of remote Git repository
+                  type: object
+                  properties:
+                    url:
+                      description: Remote git repository URL
+                      type: string
+                    user:
+                      description: Git user
+                      type: string
+                    tokenSecretRef:
+                      description: Reference to an existing Kubernetes secret
+                      type: object
+                      properties:
+                        name:
+                          description: Secret name for Keptn token
+                          type: string
+                        namespace:
+                          description: Secret namespace for Keptn token
+                          type: string
+                        key:
+                          description: Secret namespace for Keptn token
+                          type: string
+            status:
+              description: Status defines the observed state of Project
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}
