@@ -82,10 +82,7 @@ spec:
                     url:
                       description: Remote git repository URL
                       type: string
-                    user:
-                      description: Git user
-                      type: string
-                    tokenSecretRef:
+                    secretRef:
                       description: Reference to an existing Kubernetes secret
                       type: object
                       properties:
@@ -95,8 +92,11 @@ spec:
                         namespace:
                           description: Secret namespace for Keptn token
                           type: string
-                        key:
-                          description: Secret namespace for Keptn token
+                        userKey:
+                          description: Username key for Keptn user
+                          type: string
+                        tokenKey:
+                          description: Token key for Keptn token
                           type: string
             status:
               description: Status defines the observed state of Project

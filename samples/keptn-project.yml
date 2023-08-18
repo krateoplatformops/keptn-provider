@@ -15,11 +15,11 @@ spec:
   serviceName: test-operator
   git:
     url: https://<GIT_URL>/test-operator.git
-    user: <USERNAME>
-    tokenSecretRef:
+    secretRef:
       name: git-api-secret
       namespace: krateo-system
-      key: token
+      userKey: user1
+      tokenKey: token
   shipyardRef:
     name: example-shipyard
     namespace: krateo-system

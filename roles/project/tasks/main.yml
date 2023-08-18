@@ -29,8 +29,8 @@
       kubernetes.core.k8s_info:
         api_version: v1
         kind: Secret
-        name: "{{ git.token_secret_ref.name }}"
-        namespace: "{{ git.token_secret_ref.namespace }}"
+        name: "{{ git.secret_ref.name }}"
+        namespace: "{{ git.secret_ref.namespace }}"
       register: github_secret
 
     - name: Retrieve Shipyard content
@@ -53,8 +53,8 @@
         body_format: json
         body:
           gitRemoteURL: "{{ git.url }}"
-          gitToken: "{{ github_secret.resources[0].data[git.token_secret_ref.key] | b64decode }}"
-          gitUser: "{{ git.user }}"
+          gitToken: "{{ github_secret.resources[0].data[git.secret_ref.token_key] | b64decode }}"
+          gitUser: "{{ github_secret.resources[0].data[git.secret_ref.user_key | b64decode}}"
           name: "{{ project_name }}"
           shipyard: "{{ shipyard_cr.resources[0].spec[shipyard_ref.key] | b64encode }}"
         headers:
