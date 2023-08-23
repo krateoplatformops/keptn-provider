@@ -23,7 +23,28 @@
       x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
   register: check_project
 
-- name: Create Keptn project and related service
+- name: Create Keptn service inside existing project
+  block:
+    - name: Create the service just in case it's not found
+      uri:
+        url: "{{ api.url }}/controlPlane/v1/project/{{ project_name }}/service"
+        method: POST
+        return_content: yes
+        validate_certs: false
+        timeout: 300
+        status_code:
+          - 200
+        body_format: json
+        body:
+          serviceName: "{{ service_name }}"
+        headers:
+          accept: application/json
+          x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
+  when: 
+    - check_project.status == 200
+    - check_project.json.stages[0].services|length == 0
+
+- name: Create Keptn project
   block:
     - name: Retrieve access data for Git repository
       kubernetes.core.k8s_info:
@@ -57,22 +78,6 @@
           gitUser: "{{ github_secret.resources[0].data[git.secret_ref.user_key] | b64decode}}"
           name: "{{ project_name }}"
           shipyard: "{{ shipyard_cr.resources[0].spec[shipyard_ref.key] | b64encode }}"
-        headers:
-          accept: application/json
-          x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
-
-    - name: Create the service inside the project just created
-      uri:
-        url: "{{ api.url }}/controlPlane/v1/project/{{ project_name }}/service"
-        method: POST
-        return_content: yes
-        validate_certs: false
-        timeout: 300
-        status_code:
-          - 200
-        body_format: json
-        body:
-          serviceName: "{{ service_name }}"
         headers:
           accept: application/json
           x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
