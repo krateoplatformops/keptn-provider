@@ -75,7 +75,7 @@
         body:
           gitCredentials:
             https:
-              token: "{{ github_secret.resources[0].data[git.token_secret_ref.key] | b64decode }}"
+              token: "{{ github_secret.resources[0].data[git.secret_ref.token_key] | b64decode }}"
             remoteURL: "{{ git.url }}"
             user: "{{ github_secret.resources[0].data[git.secret_ref.user_key] | b64decode}}"
           name: "{{ project_name }}"
