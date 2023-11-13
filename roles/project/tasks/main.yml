@@ -83,4 +83,22 @@
         headers:
           accept: application/json
           x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
+
+    - name: Create Keptn service inside existing project
+      block:
+        - name: Create the service just in case it's not found
+          uri:
+            url: "{{ api.url }}/controlPlane/v1/project/{{ project_name }}/service"
+            method: POST
+            return_content: yes
+            validate_certs: false
+            timeout: 300
+            status_code:
+              - 200
+            body_format: json
+            body:
+              serviceName: "{{ service_name }}"
+            headers:
+              accept: application/json
+              x-token: "{{ keptn_secret.resources[0].data[api.token_secret_ref.key] | b64decode }}"
   when: check_project.status == 404
